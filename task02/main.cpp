@@ -60,8 +60,8 @@ void collide_particle_ball(
 
   // write a few lines of code to compute the velocity of ball and particle
   // please uncomment the lines below
-  const Eigen::Vector2f impulse = particle_mass * p.velo - ball_mass * ball_velo;
-  p.velo += - 1.f * impulse / particle_mass;
+  const Eigen::Vector2f impulse = 2 * particle_mass * ball_mass * (1.f * p.velo.dot(plane_norm) * plane_norm - 1.f * ball_velo.dot(plane_norm) * plane_norm) / (ball_mass + particle_mass);
+  p.velo += -1.f * impulse / particle_mass;
   ball_velo += 1.f * impulse / ball_mass;
 }
 
