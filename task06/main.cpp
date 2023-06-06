@@ -157,7 +157,7 @@ int main() {
 
   while (!::glfwWindowShouldClose(window)) {
 
-    if(current_time < 40.0) {
+    if(current_time < 1000.0) {
       float W = step_time_mass_spring_system_with_variational_integration(
           vtx2xyz, vtx2velocity, vtx2xyz_ini, line2vtx, 60.f, 1.f, {0., -0.1, 0}, vtx2isfree, dt,
           sparse_matrix);
