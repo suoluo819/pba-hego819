@@ -67,16 +67,17 @@ void step(
   Eigen::Vector3f dEdo = Eigen::Vector3f::Zero();
   Eigen::Vector3f dEdt = Eigen::Vector3f::Zero();
   {
-    Eigen::Vector3f t0 = vtx2xyz.row(i_vtx_fix) -  vtx2xyz_ini.row(i_vtx_fix);
-    dEdt += penalty*t0;
+    Eigen::Vector3f t0 = vtx2xyz.row(i_vtx_fix) - vtx2xyz_ini.row(i_vtx_fix);
+    dEdt += penalty * t0;
     dEdo += penalty*vtx2xyz_ini.row(i_vtx_fix).cross(t0.transpose() * rotation);
   }
+
   for(unsigned int i_vtx=0; i_vtx<vtx2xyz.rows(); ++i_vtx){
     // Write some code below to compute gradient of gravitational potential energy for each vertex
     // Code differentiation of energy w.r.t. translation and rotation for one line each.
     // For the differentiation w.r.t. rotation, observe how the rotation matrix will be updated at the line #83
-    // dEdt +=
-    // dEdo +=
+    dEdt += -1.f * gravity;
+    dEdo += -2.f * gravity.cross(vtx2xyz.row(i_vtx) * rotation);
     // do not change anything else except for the lines above.
   }
   translation -= learning_rate * dEdt;
